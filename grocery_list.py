@@ -1,14 +1,20 @@
 
-
 #create list of grocery stores
 grocery_stores = []
 user_input=input("Press 1 to add store; Press 2 view all stores; Press 3 to add items to list; Press q to quit: ")
 
 class GroceryStore:
-        def __init__(self, store, zip_code):
-          self.store = store
-          self.zip_code = zip_code
-          self.items = []
+  def __init__(self, store, zip_code):
+    self.store = store
+    self.zip_code = zip_code
+    self.items = []
+
+class GroceryItem:
+  def_init_(self, title, quantity):
+    self.title = item
+    self.price = 0
+    self.quantity = quantity
+
 
 while user_input != "q":
   
@@ -42,8 +48,10 @@ while user_input != "q":
     def add_grocery_item():
       shopping_list = int(input("Which grocery list? "))
       item = input("Grocery Item: ")
-      grocery_stores[shopping_list-1].items.append(item)
-
+      quantity = int(input("How many? "))
+      
+      grocery_item = GroceryItem(item, quantity)
+      grocery_stores.
     display_store_list()
     add_grocery_item()
   
