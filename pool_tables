@@ -1,0 +1,29 @@
+from tables import Table
+
+pool_tables = []
+
+def add_tables():
+  tables_to_add = int(input("How many tables to add? "))
+  
+  counter = tables_to_add
+
+  while counter > 0:
+    pool_table = Table(counter, "unoccupied")
+    pool_tables.append(pool_table)
+    counter = counter - 1
+
+def list_tables():
+  for i in range(0, len(pool_tables)):
+    print(f"{pool_tables[i].table_id} | {pool_tables[i].status}")
+
+def check_out_table():
+  table_to_check_out = int(input("Table to check out: "))
+
+  pool_tables[table_to_check_out - 1].status = "occupied"
+  print(f"{pool_tables[table_to_check_out].table_id} | {pool_tables[table_to_check_out - 1].status}")
+
+
+
+add_tables()
+list_tables()
+check_out_table()
