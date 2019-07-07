@@ -1,4 +1,4 @@
-ffrom tables import Table
+from tables import Table
 from table_funct import add_tables, list_tables, check_in_table, check_out_table, pool_tables
 import json
 
