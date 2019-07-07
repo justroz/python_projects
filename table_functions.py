@@ -1,30 +1,59 @@
 from tables import Table
-from table_funct import add_tables, list_tables
 import json
 import datetime
 
+pool_tables = []
 
-def table_management():
-  user_option = input("Add Tables: Press 1 \nList Tables: Press 2 \nCheck Table Out: Press 3 \nCheck Table In: Press 4 \nQuit System: Press q \n" )
+def add_tables():
 
-  if user_option == "1":
-    add_tables()
+  tables_to_add = int(input("How many tables to add? "))
+  
+  counter = tables_to_add
 
-  elif user_option == "2":
-    list_tables()
+  while counter > 0:
+    pool_table = Table(counter, "unoccupied")
+    pool_tables.append(pool_table.__dict__)
+    counter = counter - 1
+  
 
-  elif user_option == "3":
-    check_out_table()
+def list_tables():
+  for i in range(0, len(pool_tables)):
+    table_number = pool_tables[i]["table_id"]
+    table_status = pool_tables[i]["status"]
+    print(f"{i} {table_number} {table_status}")
 
-  elif user_option == "4":
-    check_in_table()
 
-  elif user_option == "q":
-    print("Pool Table Management System has QUIT")
+def check_out_table():
+  table_to_check_out = int(input("Table to check out: "))
 
-  else:
-    print("Press 1,2,3,4, or q")
+  x = datetime.datetime.now()
+  minutes = x.strftime("%H:%M:%S")
 
-# user_option = input("Add Tables: Press 1 \nList Tables: Press 2 \nCheck Table Out: Press 3 \nCheck Table In: Press 4 \nQuit System: Press q" )
+  if pool_tables[table_to_check_out - 1]["status"] == "occupied":
+    print("This table is already checked out.")
 
-table_management()
+  else:  
+    table_number = pool_tables[table_to_check_out]["table_id"]
+    table_status = pool_tables[table_to_check_out]["status"]
+
+    pool_tables[table_to_check_out - 1]["status"] = "occupied"
+    pool_tables[table_to_check_out - 1]["timeout"] = x
+    print(f"{table_number} | {table_status} | {minutes}")
+
+
+def check_in_table():
+  list_tables()
+  table_to_check_in = int(input("Table to check in: "))
+
+  x = datetime.now()
+
+  if pool_tables[table_to_check_in - 1].status == "unoccupied":
+    print("This table is already checked in.")
+
+  else:  
+    table_number = pool_tables[table_to_check_out]["table_id"]
+    table_status = pool_tables[table_to_check_out]["status"]
+
+    pool_tables[table_to_check_in - 1]["status"] = "unoccupied"
+    pool_tables[table_to_check_in - 1]["timein"] = x
+    print(f"{table_number} | {table_status} | {x}")
