@@ -6,14 +6,10 @@ pool_tables = []
 
 def add_tables():
 
-  tables_to_add = int(input("How many tables to add? "))
-  
-  counter = tables_to_add
-
-  while counter > 0:
-    pool_table = Table(counter, "unoccupied")
+# using a range instead of a counter to allow each table to be assigned an id starting with 1 ending with 12
+  for index in range(1,13):
+    pool_table = Table(index, "unoccupied")
     pool_tables.append(pool_table.__dict__)
-    counter = counter - 1
   
 
 def list_tables():
